@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="nano_dimen">1dp</dimen>
+    <dimen name="tiny_dimen">3dp</dimen>
+    <dimen name="small_dimen">6dp</dimen>
+    <dimen name="medium_dimen">9dp</dimen>
+    <dimen name="default_dimen">12dp</dimen>
+    <dimen name="large_dimen">15dp</dimen>
+
+    <dimen name="text_default_size">16sp</dimen>
+</resources>

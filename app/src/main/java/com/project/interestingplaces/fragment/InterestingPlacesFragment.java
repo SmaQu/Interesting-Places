@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,8 @@ public class InterestingPlacesFragment<T> extends BaseFragment {
     public static final String TAG = InterestingPlacesFragment.class.getSimpleName();
     private CountryViewModel countryViewModel;
     private InterestingPlacesAdapter interestingPlacesAdapter;
+
+    private RecyclerView coutnryRv;
 
     public static InterestingPlacesFragment create() {
         return new InterestingPlacesFragment();
@@ -44,6 +47,9 @@ public class InterestingPlacesFragment<T> extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_interesting_places, container, false);
 
+        coutnryRv = view.findViewById(R.id.recycler_country);
+        coutnryRv.setAdapter(interestingPlacesAdapter);
+
         countryViewModel.response.observe(getViewLifecycleOwner(), countriesResponseLiveData -> {
             if (countriesResponseLiveData != null) {
                 if (countriesResponseLiveData.isFailureResponse()
@@ -56,7 +62,8 @@ public class InterestingPlacesFragment<T> extends BaseFragment {
                         case 200:
                             if (response.body() != null) {
                                 //TODO update adapter
-                                interestingPlacesAdapter.setNewAdapterItems(sortValues(response.body()));
+                                interestingPlacesAdapter.setNewAdapterItems(response.body());
+                                //interestingPlacesAdapter.setNewAdapterItems(sortValues(response.body()));
                             }
                             break;
                         case 404:

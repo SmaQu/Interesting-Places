@@ -5,17 +5,23 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.project.interestingplaces.R;
 import com.project.interestingplaces.model.Country;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class InterestingPlacesAdapter extends RecyclerView.Adapter<InterestingPlacesAdapter.ViewHolder> {
 
     private List<Country> list = new ArrayList<>();
-    private OnClickListener<Country> onClickListener = null;
+    private OnClickListener<Integer> onClickListener = null;
 
     @NonNull
     @Override
@@ -29,9 +35,16 @@ public class InterestingPlacesAdapter extends RecyclerView.Adapter<InterestingPl
         if (list.size() > 0) {
             final Country country = list.get(i);
 
+            Glide.with(viewHolder.itemView)
+                    .load(country.getPicture_url())
+                    .into(viewHolder.countryPictureIv);
+
+            viewHolder.countryNameTv.setText(country.getName());
+            viewHolder.dateOfVisit.setText(formatDate(country.getDate()));
+
 
             if (onClickListener != null) {
-                onClickListener.onClick(country);
+                onClickListener.onClick(country.getId());
             }
         }
     }
@@ -46,14 +59,26 @@ public class InterestingPlacesAdapter extends RecyclerView.Adapter<InterestingPl
         notifyDataSetChanged();
     }
 
-    public void setOnClickListener(OnClickListener<Country> onClickListener) {
+    public void setOnClickListener(OnClickListener<Integer> onClickListener) {
         this.onClickListener = onClickListener;
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder {
+    private String formatDate(int timestamp) {
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
+        return simpleDateFormat.format(new Date(timestamp));
+    }
 
-        public ViewHolder(@NonNull View itemView) {
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView countryPictureIv;
+        private TextView countryNameTv;
+        private TextView dateOfVisit;
+
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
+            countryPictureIv = itemView.findViewById(R.id.image_country_picture);
+            countryNameTv = itemView.findViewById(R.id.text_country_name);
+            dateOfVisit = itemView.findViewById(R.id.text_visit_date);
         }
     }
 }
