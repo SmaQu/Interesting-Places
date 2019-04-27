@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">InterestingPlaces</string>
+    <string name="country_title">Countries</string>
     <string name="picture_of_visited_country">Picture of visited country</string>
 </resources>

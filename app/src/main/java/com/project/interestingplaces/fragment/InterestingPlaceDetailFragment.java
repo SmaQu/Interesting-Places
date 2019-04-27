@@ -8,13 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import com.project.interestingplaces.R;
-import com.project.interestingplaces.model.Country;
 import com.project.interestingplaces.model.CountryDetail;
 import com.project.interestingplaces.viewmodel.CountryDetailsViewModel;
-
-import java.util.List;
 
 import retrofit2.Response;
 
@@ -23,6 +21,8 @@ public class InterestingPlaceDetailFragment extends BaseFragment {
     public static final String TAG = InterestingPlaceDetailFragment.class.getSimpleName();
     private static final String ARG_COUNTRY_DETAIL_ID = "arg_country_detail_id";
     private CountryDetailsViewModel countryDetailsViewModel;
+
+    private Toolbar toolbar;
 
     public static InterestingPlaceDetailFragment create(int countryId) {
         final InterestingPlaceDetailFragment interestingPlaceDetailFragment = new InterestingPlaceDetailFragment();
@@ -46,6 +46,8 @@ public class InterestingPlaceDetailFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_interesting_place_detail, container, false);
 
+        toolbar = view.findViewById(R.id.toolbar);
+S
         countryDetailsViewModel.response.observe(getViewLifecycleOwner(), countryDetailResponseLiveData -> {
             if (countryDetailResponseLiveData != null) {
                 if (countryDetailResponseLiveData.isFailureResponse()

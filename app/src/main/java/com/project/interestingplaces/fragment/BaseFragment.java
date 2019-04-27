@@ -7,7 +7,7 @@ import com.project.interestingplaces.BaseActivity;
 
 public abstract class BaseFragment extends Fragment {
 
-    private BaseActivity fragmentHandler;
+    protected BaseActivity fragmentHandler;
 
     @Override
     public void onAttach(Context context) {

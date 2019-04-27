@@ -37,14 +37,16 @@ public class InterestingPlacesAdapter extends RecyclerView.Adapter<InterestingPl
 
             Glide.with(viewHolder.itemView)
                     .load(country.getPicture_url())
+                    .placeholder(R.drawable.drawable_progress_drawable)
                     .into(viewHolder.countryPictureIv);
 
             viewHolder.countryNameTv.setText(country.getName());
             viewHolder.dateOfVisit.setText(formatDate(country.getDate()));
 
-
             if (onClickListener != null) {
-                onClickListener.onClick(country.getId());
+                viewHolder.itemView.setOnClickListener(view -> {
+                    onClickListener.onClick(country.getId());
+                });
             }
         }
     }
@@ -65,7 +67,7 @@ public class InterestingPlacesAdapter extends RecyclerView.Adapter<InterestingPl
 
     private String formatDate(int timestamp) {
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
-        return simpleDateFormat.format(new Date(timestamp));
+        return simpleDateFormat.format(new Date((long) timestamp * 1000));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
