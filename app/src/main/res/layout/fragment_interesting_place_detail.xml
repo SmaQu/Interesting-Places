@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/container_detail_views"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button_show_more"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image_detail_country_picture"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_detail_picture_height"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/picture_of_visited_country"
+                android:scaleType="center"
+                tools:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/text_country_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_detail_country_picture"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/large_dimen"
+                android:layout_marginTop="@dimen/large_dimen"
+                android:layout_marginEnd="@dimen/large_dimen"
+                android:layout_toStartOf="@id/text_detail_visit_date"
+                android:textColor="@android:color/black"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+            <TextView
+                android:id="@+id/text_detail_visit_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_detail_country_picture"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/large_dimen"
+                android:textColor="@android:color/darker_gray"
+                tools:text="2018-08" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_load_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/button_show_more"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_button_height"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/default_dimen"
+        android:background="@color/colorPrimary"
+        android:text="@string/see_more"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </RelativeLayout>

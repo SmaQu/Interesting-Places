@@ -1,10 +1,13 @@
 package com.project.interestingplaces.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Country {
 
     private int id;
     private String name;
-    private String picture_url;
+    @SerializedName("picture_url")
+    private String pictureUrl;
     private int date;
 
     public int getId() {
@@ -23,12 +26,12 @@ public class Country {
         this.name = name;
     }
 
-    public String getPicture_url() {
-        return picture_url;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setPicture_url(String picture_url) {
-        this.picture_url = picture_url;
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     public int getDate() {

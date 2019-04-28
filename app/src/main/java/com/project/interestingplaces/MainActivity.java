@@ -10,9 +10,16 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setSupportActionBar(findViewById(R.id.toolbar));
 
         if (savedInstanceState == null) {
             addFragment(InterestingPlacesFragment.create());
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

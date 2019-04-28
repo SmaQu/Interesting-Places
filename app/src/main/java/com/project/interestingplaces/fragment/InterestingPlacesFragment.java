@@ -4,11 +4,15 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.project.interestingplaces.R;
 import com.project.interestingplaces.adapter.InterestingPlacesAdapter;
@@ -26,6 +30,7 @@ public class InterestingPlacesFragment extends BaseFragment {
     private InterestingPlacesAdapter interestingPlacesAdapter;
 
     private RecyclerView countryRv;
+    private Toast toast = Toast.makeText(requireContext(), getString(R.string.user_error),Toast.LENGTH_SHORT);
 
     public static InterestingPlacesFragment create() {
         return new InterestingPlacesFragment();
@@ -48,16 +53,12 @@ public class InterestingPlacesFragment extends BaseFragment {
         final View view = inflater.inflate(R.layout.fragment_interesting_places, container, false);
 
         countryRv = view.findViewById(R.id.recycler_country);
-        countryRv.setAdapter(interestingPlacesAdapter);
-        interestingPlacesAdapter.setOnClickListener(countryId -> {
-            fragmentHandler.replaceFragment(InterestingPlaceDetailFragment.create(countryId));
-        });
 
         countryViewModel.response.observe(getViewLifecycleOwner(), countriesResponseLiveData -> {
             if (countriesResponseLiveData != null) {
                 if (countriesResponseLiveData.isFailureResponse()
                         && countriesResponseLiveData.getThrowable() != null) {
-                    //TODO User Error
+                    toast.show();
                     Log.e(TAG, countriesResponseLiveData.getThrowable().toString());
                 } else if (countriesResponseLiveData.getApiResponse() != null) {
                     final Response<List<Country>> response = countriesResponseLiveData.getApiResponse();
@@ -69,7 +70,7 @@ public class InterestingPlacesFragment extends BaseFragment {
                             break;
                         case 404:
                         case 500:
-                            //TODO User Error
+                            toast.show();
                             break;
                         default:
                     }
@@ -78,6 +79,23 @@ public class InterestingPlacesFragment extends BaseFragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final ActionBar actionBar = ((AppCompatActivity) requireActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayShowHomeEnabled(false);
+            actionBar.setTitle(getString(R.string.country_title));
+        }
+
+        countryRv.setAdapter(interestingPlacesAdapter);
+        interestingPlacesAdapter.setOnClickListener(countryId -> {
+            fragmentHandler.replaceFragment(InterestingPlaceDetailFragment.create(countryId));
+        });
+
     }
 
     public List<Country> sortValues(List<Country> unSorted) {

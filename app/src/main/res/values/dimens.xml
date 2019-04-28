@@ -6,7 +6,10 @@
     <dimen name="small_dimen">6dp</dimen>
     <dimen name="medium_dimen">9dp</dimen>
     <dimen name="default_dimen">12dp</dimen>
-    <dimen name="large_dimen">15dp</dimen>
+    <dimen name="large_dimen">16dp</dimen>
 
     <dimen name="text_default_size">16sp</dimen>
+    <dimen name="dimen_detail_picture_height">250dp</dimen>
+    <dimen name="dimen_countries_picture_width">150dp</dimen>
+    <dimen name="dimen_button_height">55dp</dimen>
 </resources>

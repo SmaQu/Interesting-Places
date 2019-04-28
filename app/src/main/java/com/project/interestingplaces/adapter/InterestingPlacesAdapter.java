@@ -11,12 +11,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.project.interestingplaces.R;
 import com.project.interestingplaces.model.Country;
+import com.project.interestingplaces.util.DateParser;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class InterestingPlacesAdapter extends RecyclerView.Adapter<InterestingPlacesAdapter.ViewHolder> {
 
@@ -36,12 +34,12 @@ public class InterestingPlacesAdapter extends RecyclerView.Adapter<InterestingPl
             final Country country = list.get(i);
 
             Glide.with(viewHolder.itemView)
-                    .load(country.getPicture_url())
+                    .load(country.getPictureUrl())
                     .placeholder(R.drawable.drawable_progress_drawable)
                     .into(viewHolder.countryPictureIv);
 
             viewHolder.countryNameTv.setText(country.getName());
-            viewHolder.dateOfVisit.setText(formatDate(country.getDate()));
+            viewHolder.dateOfVisit.setText(DateParser.formatDate(country.getDate()));
 
             if (onClickListener != null) {
                 viewHolder.itemView.setOnClickListener(view -> {
@@ -63,11 +61,6 @@ public class InterestingPlacesAdapter extends RecyclerView.Adapter<InterestingPl
 
     public void setOnClickListener(OnClickListener<Integer> onClickListener) {
         this.onClickListener = onClickListener;
-    }
-
-    private String formatDate(int timestamp) {
-        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
-        return simpleDateFormat.format(new Date((long) timestamp * 1000));
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
