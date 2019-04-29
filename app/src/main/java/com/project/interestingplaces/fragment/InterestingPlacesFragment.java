@@ -30,8 +30,6 @@ public class InterestingPlacesFragment extends BaseFragment {
     private InterestingPlacesAdapter interestingPlacesAdapter;
 
     private RecyclerView countryRv;
-    private Toast toast = Toast.makeText(requireContext(), getString(R.string.user_error),Toast.LENGTH_SHORT);
-
     public static InterestingPlacesFragment create() {
         return new InterestingPlacesFragment();
     }
@@ -51,6 +49,7 @@ public class InterestingPlacesFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_interesting_places, container, false);
+        final Toast toast = Toast.makeText(requireContext(), getString(R.string.user_error),Toast.LENGTH_SHORT);
 
         countryRv = view.findViewById(R.id.recycler_country);
 

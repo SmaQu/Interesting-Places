@@ -31,7 +31,6 @@ public class InterestingPlaceDetailFragment extends BaseFragment {
     public static final String TAG = InterestingPlaceDetailFragment.class.getSimpleName();
     private static final String ARG_COUNTRY_DETAIL_ID = "arg_country_detail_id";
     private CountryDetailsViewModel countryDetailsViewModel;
-    private Toast toast = Toast.makeText(requireContext(), getString(R.string.user_error), Toast.LENGTH_SHORT);
 
     private ActionBar actionBar;
 
@@ -62,6 +61,7 @@ public class InterestingPlaceDetailFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_interesting_place_detail, container, false);
+        final Toast toast = Toast.makeText(requireContext(), getString(R.string.user_error), Toast.LENGTH_SHORT);
 
         loadingPb = view.findViewById(R.id.progress_load_details);
         countryPictureIv = view.findViewById(R.id.image_detail_country_picture);
